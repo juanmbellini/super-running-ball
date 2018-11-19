@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1347957014097762}
+  m_IsPrefabAsset: 1
+--- !u!1 &1347957014097762
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4088850378156992}
+  - component: {fileID: 114094000383749388}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4088850378156992
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1347957014097762}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114094000383749388
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1347957014097762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3209797032c14128a28121f48dde7d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _chunksPrefabs:
+  - {fileID: 114281900701633046, guid: ef0dc22391e809d489e91fea2cba9566, type: 2}
+  - {fileID: 114745254056970248, guid: 8e03715975e2c6e4387e4ff73c465517, type: 2}
+  - {fileID: 114858446134068244, guid: 6b297075f431ab9448ff0ee0098ba660, type: 2}
+  - {fileID: 114844473886158586, guid: ed71b877f035c2841857a6a02bef1f05, type: 2}
+  - {fileID: 114685422098684294, guid: 8a904c21f9e29c0469c1201f4dcd3ddb, type: 2}
+  - {fileID: 114060715711795298, guid: 8a356a688c706174b86c6ba3de97a4b9, type: 2}
+  - {fileID: 114667410673890908, guid: 4f5e93935b0115143a05c71b74d38d39, type: 2}
+  - {fileID: 114777708913492510, guid: dd9cf6ff53dd6d74c98a986d1fc593f7, type: 2}
+  - {fileID: 114825560863856846, guid: da08025b22df9bb4fafa664200c8763a, type: 2}
+  - {fileID: 114748114144003780, guid: 64e9f7222c6e8894a93fc2f415ba316e, type: 2}
+  - {fileID: 114408218687114390, guid: a0aceba6ab5a7f34e8d1db548d14681b, type: 2}
+  - {fileID: 114586409514790594, guid: 32e3b77fbc760a3479e657942f15ee50, type: 2}
+  - {fileID: 114038394163618740, guid: f841152bed6d81e44a8f79b24ccae715, type: 2}
+  - {fileID: 114884360025438242, guid: f8f7e9c36bdf459408e35b61456fe9e1, type: 2}
+  _playerStartingPosition: {x: 0, y: 3, z: 0}

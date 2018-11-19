@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23764251271356462}
   - component: {fileID: 65984937379720316}
   m_Layer: 0
-  m_Name: Obstacle1
+  m_Name: Obstacle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,9 +37,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4273321287968038}
+  - component: {fileID: 114777708913492510}
   m_Layer: 0
   m_Name: Chunk7
-  m_TagString: Untagged
+  m_TagString: ChunkPrefab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56,7 +57,7 @@ GameObject:
   - component: {fileID: 23122390201868068}
   - component: {fileID: 65271270016666344}
   m_Layer: 0
-  m_Name: Obstacle
+  m_Name: Obstacle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,7 +88,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1531469678882544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.9, y: 0, z: 10.84}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4952091897495364}
@@ -103,7 +104,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1615816099057194}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.001, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 4, y: 1, z: 3}
   m_Children: []
   m_Father: {fileID: 4273321287968038}
@@ -297,3 +298,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114777708913492510
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1531469678882544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17f1a01f2febb43b59c248cadc105868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _chunkLength: 7

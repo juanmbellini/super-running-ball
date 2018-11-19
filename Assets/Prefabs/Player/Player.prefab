@@ -39,6 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4511548489659598}
+  - component: {fileID: 114896210518144636}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -53,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1172079003697704}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.3042083, y: 0.65, z: 0.49323082}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4704859514858864}
@@ -67,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1168952709085966}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.53, y: 0.39, z: -0.46}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4511548489659598}
@@ -143,6 +144,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _horizontalSpeed: 2
   _jumpingForceModule: 3
+--- !u!114 &114896210518144636
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1172079003697704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd06d8d0baac24c529688dcc4ff51074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135020950661581134
 SphereCollider:
   m_ObjectHideFlags: 1

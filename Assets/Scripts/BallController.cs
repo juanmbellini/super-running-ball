@@ -1,6 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
+/// <summary>
+/// Controller for the ball (i.e the player).
+/// </summary>
 public class BallController : MonoBehaviour {
     /// <summary>
     /// Tolerance for float comparinsons.
@@ -43,6 +46,7 @@ public class BallController : MonoBehaviour {
 
     private void Update() {
         CheckJump();
+        UpdateParentPosition();
         CheckValuesChanges(); // TODO: remove (this is testing stuff)
     }
 
@@ -61,10 +65,17 @@ public class BallController : MonoBehaviour {
     }
 
     /// <summary>
+    /// Moves the parent so that the player as a whole is moved.
+    /// </summary>
+    private void UpdateParentPosition() {
+        transform.parent.position = transform.position;
+        transform.localPosition = Vector3.zero;
+    }
+
+    /// <summary>
     /// Performs the jumping action.
     /// </summary>
     private void Jump() {
-        Debug.Log("Jump!!");
         _rigidBody.AddForce(_jumpingForce, ForceMode.Impulse);
         _isJumping = true;
     }
