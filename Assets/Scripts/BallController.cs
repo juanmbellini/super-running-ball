@@ -59,6 +59,7 @@ public class BallController : MonoBehaviour {
     /// Checks whether a jumping action was triggered.
     /// </summary>
     private void CheckJump() {
+        //Maybe we should check also for collision for the player to jump
         if (Input.GetKey(KeyCode.Space) && !_isJumping) {
             Jump();
         }

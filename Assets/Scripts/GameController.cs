@@ -1,5 +1,6 @@
 ﻿using Boo.Lang.Runtime;
 using UnityEngine;
+using UnityEngine.Assertions.Comparers;
 
 /// <summary>
 /// Class containing the game's main logic.
@@ -43,14 +44,22 @@ public class GameController : MonoBehaviour {
     /// </summary>
     private Player _player;
 
+    /// <summary>
+    /// New gravity constant
+    /// </summary>
+    private float gravity = -30.0f;
+
     private void Awake() {
         _levelManager = FindObjectOfType<LevelManager>();
     }
 
     // Use this for initialization
-    private void Start() {
+    private void Start()
+    {
+        ModifyGravity();
         SpawnPlayer();
         CreatePlayerCamera();
+        
     }
 
     // Update is called once per frame
@@ -64,6 +73,14 @@ public class GameController : MonoBehaviour {
         _player = Instantiate(_playerPrefab);
         _player.name = "Player";
         _player.transform.position = _levelManager.PlayerStartingPosition;
+    }
+
+    /// <summary>
+    /// Modifies global gravity
+    /// </summary>
+    private void ModifyGravity()
+    {
+        Physics.gravity = new Vector3(0f, gravity ,0f);
     }
 
     /// <summary>
