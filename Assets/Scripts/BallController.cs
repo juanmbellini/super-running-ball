@@ -35,20 +35,40 @@ public class BallController : MonoBehaviour {
     /// </summary>
     private bool _isJumping;
 
+    private Collider _collider;
 
+    private float distToGround;
+    
     private void Start() {
         _rigidBody = GetComponent<Rigidbody>();
+        _collider = GetComponent<Collider>();
+        distToGround = _collider.bounds.extents.y;
         _jumpingForce = new Vector3(0, _jumpingForceModule, 0);
         _isJumping = false;
+        _rigidBody.isKinematic = true;
         _rigidBody.velocity = new Vector3(_horizontalSpeed, 0, 0);
     }
 
 
     private void Update() {                
         UpdateParentPosition();
+        MantainSpeed();
         CheckValuesChanges(); // TODO: remove (this is testing stuff)
     }
 
+
+    private void MantainSpeed()
+    {
+        if (_rigidBody.velocity.x > _horizontalSpeed)
+        {
+            _rigidBody.isKinematic = true;
+            _rigidBody.AddForce(Vector3.right, ForceMode.VelocityChange);
+        }
+        else
+        {
+            _rigidBody.isKinematic = false;
+        }
+    }
     
     private void OnCollisionStay() {
         CheckJump();
@@ -60,11 +80,21 @@ public class BallController : MonoBehaviour {
     /// </summary>
     private void CheckJump() {
         //Maybe we should check also for collision for the player to jump
-        if (Input.GetKey(KeyCode.Space) && !_isJumping) {
+        if (Input.GetKey(KeyCode.Space) && IsGrounded()) {
             Jump();
         }
     }
 
+    private bool IsAgainstWall()
+    {
+        return Physics.Raycast(transform.position, Vector3.right, distToGround + (float)0.5);
+    }
+    
+    private bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround + (float)0.5);
+    }
+    
     /// <summary>
     /// Moves the parent so that the player as a whole is moved.
     /// </summary>
