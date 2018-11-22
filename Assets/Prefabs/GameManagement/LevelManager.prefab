@@ -67,3 +67,6 @@ MonoBehaviour:
   - {fileID: 114038394163618740, guid: f841152bed6d81e44a8f79b24ccae715, type: 2}
   - {fileID: 114884360025438242, guid: f8f7e9c36bdf459408e35b61456fe9e1, type: 2}
   _playerStartingPosition: {x: 0, y: 3, z: 0}
+  _levelStartingPosition: {x: 0, y: 0, z: 0}
+  _buildBatchSize: 10
+  _creationMarginSize: 5
