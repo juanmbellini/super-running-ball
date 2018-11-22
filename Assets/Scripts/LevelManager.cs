@@ -30,15 +30,13 @@ public class LevelManager : MonoBehaviour {
     /// </summary>
     [SerializeField] private Vector3 _levelStartingPosition;
 
-//    private int _startingAmount;
-
     /// <summary>
     /// The amount of chunks added to the level at once.
     /// </summary>
     [SerializeField] private int _buildBatchSize;
 
     /// <summary>
-    /// The min. margin that must exists between the player's position and the end of the level.
+    /// The amount of chunks that must exist till the end of the already created level.
     /// </summary>
     [SerializeField] private int _creationMarginSize;
 
@@ -52,13 +50,42 @@ public class LevelManager : MonoBehaviour {
     /// </summary>
     public Player Player { get; set; }
 
+    /// <summary>
+    /// Indicates how many chunks were already created so far.
+    /// </summary>
     private int _amountOfCreatedChunks;
+
+    /// <summary>
+    /// Indicates the 'x' component of the starting position of the next chunk to be created.
+    /// </summary>
     private float _nextStartingPosition;
+
+    /// <summary>
+    /// List holding the chunks that were created and still exist in the real world.
+    /// </summary>
+    private readonly List<Chunk> _createdChunks = new List<Chunk>();
+
+    /// <summary>
+    /// The length that must exist till the end of the already created level.
+    /// </summary>
+    private float _creationMarginLength;
 
     /// <summary>
     /// A Dictionary containing the chunks according to the defficulty.
     /// </summary>
     private Dictionary<int, List<Chunk>> _chunksByDifficulty;
+
+
+    private void Start() {
+        _nextStartingPosition = _levelStartingPosition.x;
+        _amountOfCreatedChunks = 0;
+        _chunksByDifficulty = SeparateByDifficulty();
+    }
+
+    private void Update() {
+        CheckLevelExpansion();
+    }
+
 
     /// <summary>
     /// Player starting position getter.
@@ -67,26 +94,19 @@ public class LevelManager : MonoBehaviour {
         get { return _playerStartingPosition; }
     }
 
-    // Use this for initialization
-    private void Start() {
-        _nextStartingPosition = _levelStartingPosition.x;
-        _amountOfCreatedChunks = 0;
-        _chunksByDifficulty = SeparateByDifficulty();
-
-//        BuildLevel(_chunksPrefabs.Count);
-    }
-
-    // Update is called once per frame
-    private void Update() {
-        CheckLevelExpansion();
-    }
-
+    /// <summary>
+    /// Exppands the level if necessary.
+    /// </summary>
     private void CheckLevelExpansion() {
         if (ShouldExpand()) {
             ExpandLevel();
         }
     }
 
+    /// <summary>
+    /// Indicates whether the level should be expanded, according to the actual built level, and the player's position.
+    /// </summary>
+    /// <returns>true if the level should be expanded, or false otherwise.</returns>
     private bool ShouldExpand() {
         return _nextStartingPosition - Player.transform.position.x < _creationMarginLength;
     }
@@ -111,19 +131,19 @@ public class LevelManager : MonoBehaviour {
     }
 
 
-    private readonly List<Chunk> _createdChunks = new List<Chunk>();
-
-    private float _creationMarginLength;
-
+    /// <summary>
+    /// Builds more level, according to the given amount.
+    /// </summary>
+    /// <param name="amount">The amount of chunks that must be added to the level.</param>
     private void BuildLevel(int amount) {
-        var total = _amountOfCreatedChunks + amount;
+        var total = _amountOfCreatedChunks + amount; // Precalculates how many chunks will exist
         while (_amountOfCreatedChunks < total) {
             // Calculate a random chunk TODO: improve according to difficulty
             var selectedChunk = Random.Range(0, _chunksPrefabs.Count);
             var chunk = Instantiate(_chunksPrefabs[selectedChunk]);
             chunk.name = "Chunk" + _amountOfCreatedChunks;
 
-            // The chunk must start in the next starting position 'x' value
+            // The chunk must start in the next starting position 'x' component
             var chunkLength = chunk.ChunkLength;
             var chunkX = _nextStartingPosition + chunkLength / 2;
             chunk.transform.position = new Vector3(chunkX, _levelStartingPosition.y, _levelStartingPosition.z);
@@ -133,8 +153,13 @@ public class LevelManager : MonoBehaviour {
             _amountOfCreatedChunks++;
             _createdChunks.Add(chunk);
         }
+        RecalculateCreationMarginLength(); // Calculate the margin in 'x' at which the level should be expanded.
+    }
 
-        // Calculate the margin in 'x' at which the level should be expanded.
+    /// <summary>
+    /// Recalculates the creation margin length (this is an idempotent operation).
+    /// </summary>
+    private void RecalculateCreationMarginLength() {
         _creationMarginLength = 0;
         for (var i = _createdChunks.Count - 1; i >= _createdChunks.Count - _creationMarginSize; i--) {
             _creationMarginLength += _createdChunks[i].ChunkLength;

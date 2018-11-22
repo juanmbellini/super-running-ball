@@ -14,12 +14,10 @@ public class PlayerCamera : MonoBehaviour {
     /// </summary>
     public Player Player { get; set; }
 
-    // Use this for initialization
     private void Start() {
         _initialPosition = transform.position;
     }
 
-    // Update is called once per frame
     private void Update() {
         transform.position = new Vector3(Player.transform.position.x, _initialPosition.y, _initialPosition.z);
     }

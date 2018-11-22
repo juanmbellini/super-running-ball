@@ -32,7 +32,7 @@ public class Chunk : MonoBehaviour {
         get { return _difficulty; }
     }
 
-    // Use this for initialization
+
     private void Start() {
         if (_chunkLength <= 0) {
             throw new RuntimeException("Chunk length must be positive.");
@@ -40,9 +40,5 @@ public class Chunk : MonoBehaviour {
         if (_difficulty < 0) {
             throw new RuntimeException("Chunk difficulty cannot be negative.");
         }
-    }
-
-    // Update is called once per frame
-    private void Update() {
     }
 }
