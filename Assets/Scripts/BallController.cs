@@ -45,30 +45,15 @@ public class BallController : MonoBehaviour {
         distToGround = _collider.bounds.extents.y;
         _jumpingForce = new Vector3(0, _jumpingForceModule, 0);
         _isJumping = false;
-        _rigidBody.isKinematic = true;
         _rigidBody.velocity = new Vector3(_horizontalSpeed, 0, 0);
     }
 
 
     private void Update() {                
         UpdateParentPosition();
-        MantainSpeed();
         CheckValuesChanges(); // TODO: remove (this is testing stuff)
     }
 
-
-    private void MantainSpeed()
-    {
-        if (_rigidBody.velocity.x > _horizontalSpeed)
-        {
-            _rigidBody.isKinematic = true;
-            _rigidBody.AddForce(Vector3.right, ForceMode.VelocityChange);
-        }
-        else
-        {
-            _rigidBody.isKinematic = false;
-        }
-    }
     
     private void OnCollisionStay() {
         CheckJump();
@@ -84,15 +69,10 @@ public class BallController : MonoBehaviour {
             Jump();
         }
     }
-
-    private bool IsAgainstWall()
-    {
-        return Physics.Raycast(transform.position, Vector3.right, distToGround + (float)0.5);
-    }
     
     private bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, -Vector3.up, distToGround + (float)0.5);
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround + (float)0.8);
     }
     
     /// <summary>
