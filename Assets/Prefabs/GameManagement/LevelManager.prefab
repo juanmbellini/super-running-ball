@@ -66,7 +66,19 @@ MonoBehaviour:
   - {fileID: 114586409514790594, guid: 32e3b77fbc760a3479e657942f15ee50, type: 2}
   - {fileID: 114038394163618740, guid: f841152bed6d81e44a8f79b24ccae715, type: 2}
   - {fileID: 114884360025438242, guid: f8f7e9c36bdf459408e35b61456fe9e1, type: 2}
+  _randomSeed: 0
   _playerStartingPosition: {x: 0, y: 3, z: 0}
   _levelStartingPosition: {x: 0, y: 0, z: 0}
   _buildBatchSize: 10
   _creationMarginSize: 5
+  _levelsCompositions:
+  - {fileID: 11400000, guid: 81572aa2d16fe4d12ba8d7ed800495d4, type: 2}
+  - {fileID: 11400000, guid: e9e5e95a8fa0b463a86d2831d92c0a22, type: 2}
+  - {fileID: 11400000, guid: c9c2307ec067b4796a24f48ec2aae567, type: 2}
+  - {fileID: 11400000, guid: 708e29eabd4f947edabfe5efe19d1f32, type: 2}
+  - {fileID: 11400000, guid: aa885910c2e354b5cbb0da98c48c2ea8, type: 2}
+  - {fileID: 11400000, guid: 5f80c5af00f9642779bd5bcf0e7a289d, type: 2}
+  - {fileID: 11400000, guid: ef6b09983047d4dafa310dedc70b55c9, type: 2}
+  - {fileID: 11400000, guid: 14b16741cce974dee8ee301823c9f553, type: 2}
+  - {fileID: 11400000, guid: b0d2fa21432f8447eb68882249457b72, type: 2}
+  - {fileID: 11400000, guid: 8f90e09f0992e4ad5aaed69de0f08991, type: 2}

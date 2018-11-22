@@ -44,12 +44,12 @@ public class BallController : MonoBehaviour {
     }
 
 
-    private void Update() {                
+    private void Update() {
         UpdateParentPosition();
         CheckValuesChanges(); // TODO: remove (this is testing stuff)
     }
 
-    
+
     private void OnCollisionStay() {
         CheckJump();
         StopJumping();
