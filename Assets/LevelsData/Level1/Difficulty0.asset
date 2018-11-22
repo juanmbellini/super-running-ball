@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Name: Difficulty0
   m_EditorClassIdentifier: 
   _difficulty: 0
-  _probability: 0.5
+  _probability: 0.85
