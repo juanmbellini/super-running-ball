@@ -1,4 +1,4 @@
-﻿using Boo.Lang.Runtime;
+using Boo.Lang.Runtime;
 using UnityEngine;
 
 /// <summary>
