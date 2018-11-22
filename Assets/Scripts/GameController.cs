@@ -52,16 +52,11 @@ public class GameController : MonoBehaviour {
         _levelManager = FindObjectOfType<LevelManager>();
     }
 
-    // Use this for initialization
     private void Start() {
         ModifyGravity();
         SpawnPlayer();
         CreatePlayerCamera();
         _levelManager.Player = _player; // Sets the player in the level manager.
-    }
-
-    // Update is called once per frame
-    private void Update() {
     }
 
     /// <summary>

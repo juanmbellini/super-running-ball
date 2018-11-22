@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -38,7 +38,7 @@ public class BallController : MonoBehaviour {
     private Collider _collider;
 
     private float distToGround;
-    
+
     private void Start() {
         _rigidBody = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();
@@ -49,12 +49,12 @@ public class BallController : MonoBehaviour {
     }
 
 
-    private void Update() {                
+    private void Update() {
         UpdateParentPosition();
         CheckValuesChanges(); // TODO: remove (this is testing stuff)
     }
 
-    
+
     private void OnCollisionStay() {
         CheckJump();
         StopJumping();
@@ -69,12 +69,11 @@ public class BallController : MonoBehaviour {
             Jump();
         }
     }
-    
-    private bool IsGrounded()
-    {
-        return Physics.Raycast(transform.position, -Vector3.up, distToGround + (float)0.8);
+
+    private bool IsGrounded() {
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround + (float) 0.8);
     }
-    
+
     /// <summary>
     /// Moves the parent so that the player as a whole is moved.
     /// </summary>
