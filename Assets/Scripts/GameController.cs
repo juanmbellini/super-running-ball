@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour {
     /// <summary>
     /// New gravity constant
     /// </summary>
-    private float gravity = -30.0f;
+    private float gravity = -60.0f;
 
     private void Awake() {
         _levelManager = FindObjectOfType<LevelManager>();

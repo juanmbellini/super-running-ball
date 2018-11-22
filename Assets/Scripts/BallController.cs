@@ -35,9 +35,14 @@ public class BallController : MonoBehaviour {
     /// </summary>
     private bool _isJumping;
 
+    private Collider _collider;
 
+    private float distToGround;
+    
     private void Start() {
         _rigidBody = GetComponent<Rigidbody>();
+        _collider = GetComponent<Collider>();
+        distToGround = _collider.bounds.extents.y;
         _jumpingForce = new Vector3(0, _jumpingForceModule, 0);
         _isJumping = false;
         _rigidBody.velocity = new Vector3(_horizontalSpeed, 0, 0);
@@ -60,11 +65,16 @@ public class BallController : MonoBehaviour {
     /// </summary>
     private void CheckJump() {
         //Maybe we should check also for collision for the player to jump
-        if (Input.GetKey(KeyCode.Space) && !_isJumping) {
+        if (Input.GetKey(KeyCode.Space) && IsGrounded()) {
             Jump();
         }
     }
-
+    
+    private bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround + (float)0.8);
+    }
+    
     /// <summary>
     /// Moves the parent so that the player as a whole is moved.
     /// </summary>
