@@ -66,6 +66,19 @@ MonoBehaviour:
   - {fileID: 114586409514790594, guid: 32e3b77fbc760a3479e657942f15ee50, type: 2}
   - {fileID: 114038394163618740, guid: f841152bed6d81e44a8f79b24ccae715, type: 2}
   - {fileID: 114884360025438242, guid: f8f7e9c36bdf459408e35b61456fe9e1, type: 2}
+  - {fileID: 114013867429281698, guid: 262b712ca86ffcf408240bee36404e30, type: 2}
+  - {fileID: 114879412814514490, guid: 84c521f0a791a9643b292edb003c4734, type: 2}
+  - {fileID: 114483918857248892, guid: b61703be4b45caf42a543883b9fa3a89, type: 2}
+  - {fileID: 114900545061532768, guid: 8f27edb3e9b474542a6c8ebe09f58c26, type: 2}
+  - {fileID: 114772641381742246, guid: 4cd9b870e4ea79242a0563cc01efc9a5, type: 2}
+  - {fileID: 114482665522579414, guid: eaa284a6dcdaef94c94792c0bb3dd024, type: 2}
+  - {fileID: 114203631839132118, guid: 2a340b8ff6e325a4a9ccb30a896911c7, type: 2}
+  - {fileID: 114420788599793552, guid: 24a062fea1ff7a64a9a727461e610e9d, type: 2}
+  - {fileID: 114708097494356290, guid: 59fa0304478ca7f4da2d336171b8ca07, type: 2}
+  - {fileID: 114129336054378074, guid: 43c0ee2860857494fb417056a22b6dad, type: 2}
+  - {fileID: 114727802133473052, guid: 9bc340e1ac4f44f4fad4a4b7fe1ad054, type: 2}
+  - {fileID: 114655126316073010, guid: a24ba0245256e88458e2cb90796aeb25, type: 2}
+  - {fileID: 114043212913010152, guid: 034e178402489f749a5489390bbd5485, type: 2}
   _randomSeed: 0
   _playerStartingPosition: {x: 0, y: 3, z: 0}
   _levelStartingPosition: {x: 0, y: 0, z: 0}
