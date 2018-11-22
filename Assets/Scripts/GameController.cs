@@ -1,6 +1,5 @@
-﻿using Boo.Lang.Runtime;
+using Boo.Lang.Runtime;
 using UnityEngine;
-using UnityEngine.Assertions.Comparers;
 
 /// <summary>
 /// Class containing the game's main logic.
@@ -53,17 +52,11 @@ public class GameController : MonoBehaviour {
         _levelManager = FindObjectOfType<LevelManager>();
     }
 
-    // Use this for initialization
-    private void Start()
-    {
+    private void Start() {
         ModifyGravity();
         SpawnPlayer();
         CreatePlayerCamera();
-        
-    }
-
-    // Update is called once per frame
-    private void Update() {
+        _levelManager.Player = _player; // Sets the player in the level manager.
     }
 
     /// <summary>
@@ -78,9 +71,8 @@ public class GameController : MonoBehaviour {
     /// <summary>
     /// Modifies global gravity
     /// </summary>
-    private void ModifyGravity()
-    {
-        Physics.gravity = new Vector3(0f, gravity ,0f);
+    private void ModifyGravity() {
+        Physics.gravity = new Vector3(0f, gravity, 0f);
     }
 
     /// <summary>
