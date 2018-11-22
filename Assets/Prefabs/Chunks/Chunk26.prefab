@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 4017393918281538}
   - component: {fileID: 114043212913010152}
   m_Layer: 0
-  m_Name: New Prefab
+  m_Name: Chunk26
   m_TagString: ChunkPrefab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
