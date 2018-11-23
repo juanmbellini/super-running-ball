@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Boo.Lang.Runtime;
@@ -118,6 +118,11 @@ public class LevelManager : MonoBehaviour {
     /// </summary>
     private Random.State _randomState;
 
+    
+    private TimeManager _timeManager;
+
+    private float timeToAdd = 20f;
+    
 
     private bool _initialized = false;
 
@@ -137,6 +142,8 @@ public class LevelManager : MonoBehaviour {
         if (_randomSeed != 0) {
             Random.InitState(_randomSeed); // Initialize random
         }
+
+        _timeManager = FindObjectOfType<TimeManager>();
         _randomState = Random.state; // Save the random's state
         _amountOfCreatedChunks = 0;
         _nextStartingPosition = _levelStartingPosition.x;
@@ -183,6 +190,7 @@ public class LevelManager : MonoBehaviour {
         if (ShouldExpand()) {
             ExpandLevel();
             DestoyLevel();
+            _timeManager.addTime(timeToAdd);
         }
     }
 

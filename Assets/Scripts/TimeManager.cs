@@ -48,6 +48,11 @@ public class TimeManager : MonoBehaviour {
         _enabled = false;
     }
 
+    public void addTime(float time)
+    {
+        TimeRemaining = TimeRemaining + time;
+    }
+
     /// <summary>
     /// Resumes the timer.
     /// </summary>
