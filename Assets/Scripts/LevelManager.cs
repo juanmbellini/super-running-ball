@@ -113,12 +113,19 @@ public class LevelManager : MonoBehaviour {
     /// </summary>
     private Random.State _randomState;
 
+    
+    private TimeManager _timeManager;
+
+    private float timeToAdd = 20f;
+    
 
     private void Start() {
         // If the seed is zero, then we use the "default" seed.
         if (_randomSeed != 0) {
             Random.InitState(_randomSeed); // Initialize random
         }
+
+        _timeManager = FindObjectOfType<TimeManager>();
         _randomState = Random.state; // Save the random's state
         _amountOfCreatedChunks = 0;
         _nextStartingPosition = _levelStartingPosition.x;
@@ -165,6 +172,7 @@ public class LevelManager : MonoBehaviour {
     private void CheckLevelExpansion() {
         if (ShouldExpand()) {
             ExpandLevel();
+            _timeManager.addTime(timeToAdd);
         }
     }
 
