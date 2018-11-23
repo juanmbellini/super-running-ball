@@ -123,6 +123,7 @@ public class LevelManager : MonoBehaviour {
 
 
     private void Start() {
+        RemoveChunksFromScene(); // First clear the level
         InitializeLevelManager();
     }
 
@@ -132,7 +133,6 @@ public class LevelManager : MonoBehaviour {
 
     private void InitializeLevelManager() {
         Debug.Log("Initializing level manager");
-        RemoveChunksFromScene(); // First clear the level
         // If the seed is zero, then we use the "default" seed.
         if (_randomSeed != 0) {
             Random.InitState(_randomSeed); // Initialize random
@@ -140,6 +140,7 @@ public class LevelManager : MonoBehaviour {
         _randomState = Random.state; // Save the random's state
         _amountOfCreatedChunks = 0;
         _nextStartingPosition = _levelStartingPosition.x;
+        _createdChunks.Clear();
         _chunksByDifficulty = SeparateByDifficulty();
         _levels = ToLevelDefinition(_levelsCompositions);
         _actualLevel = _levels.Keys.Min();
@@ -368,6 +369,20 @@ public class LevelManager : MonoBehaviour {
         }
         _actualLevel = levelNumber;
         ExpandLevel();
+    }
+
+    /// <summary>
+    /// Clears the level.
+    /// </summary>
+    public void ClearLevel() {
+        var chunks = FindObjectsOfType<Chunk>();
+        if (chunks == null) {
+            return;
+        }
+        foreach (var chunk in chunks) {
+            DestroyImmediate(chunk.gameObject);
+        }
+        InitializeLevelManager();
     }
 
 

@@ -35,6 +35,9 @@ public class LevelGeneratorEditorWindow : EditorWindow {
         if (GUILayout.Button("Create")) {
             _levelManager.CreateLevel(_selectedLevel);
         }
+        if (GUILayout.Button("Clear")) {
+            _levelManager.ClearLevel();
+        }
     }
 
     private void OnInspectorUpdate() {
