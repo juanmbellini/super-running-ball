@@ -33,6 +33,10 @@ public class GameController : MonoBehaviour {
     /// </summary>
     private PlayerCamera _playerCamera;
 
+    private TimeManager _timeManager;
+
+    private UIController _uiController;
+
 
     // ================================================================================================================
     // Objects
@@ -50,6 +54,8 @@ public class GameController : MonoBehaviour {
 
     private void Awake() {
         _levelManager = FindObjectOfType<LevelManager>();
+        _uiController = FindObjectOfType<UIController>();
+        _timeManager = FindObjectOfType<TimeManager>();
     }
 
     private void Start() {
@@ -73,6 +79,18 @@ public class GameController : MonoBehaviour {
     /// </summary>
     private void ModifyGravity() {
         Physics.gravity = new Vector3(0f, gravity, 0f);
+    }
+    
+    /// <summary>
+    /// Notifies this game controller that there is no more time.
+    /// </summary>
+    public void NotifyNoMoreTime() {
+        _timeManager.StopTimer();    
+        _uiController.NotifyTimeUp();
+    }
+    
+    public float GetTimeRemaining() {
+        return _timeManager.TimeRemaining;
     }
 
     /// <summary>
