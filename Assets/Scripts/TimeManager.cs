@@ -12,7 +12,7 @@ public class TimeManager : MonoBehaviour {
     /// <summary>
     /// Initial time (in seconds).
     /// </summary>
-    [SerializeField] private float _startingTime = 60f;
+    [SerializeField] private float _startingTime = 15f;
 
     /// <summary>
     /// Time remaining.
@@ -34,10 +34,10 @@ public class TimeManager : MonoBehaviour {
         if (!_enabled) {
             return; // Do not update timer if it is not enabled
         }
-        TimeRemaining -= Time.deltaTime;        
+        TimeRemaining -= Time.deltaTime;
         if (TimeRemaining <= 0) {
             // If there is no time remaining, then notify the game controller about this event.
-            _gameController.NotifyNoMoreTime();           
+            _gameController.NotifyNoMoreTime();
         }
     }
 

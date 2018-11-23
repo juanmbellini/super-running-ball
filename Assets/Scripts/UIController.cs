@@ -15,6 +15,10 @@ public class UIController : MonoBehaviour {
     /// </summary>
     [SerializeField] private TextMeshProUGUI _timeIsUpMessage;
 
+    /// <summary>
+    /// The game over's Textfield.
+    /// </summary>
+    [SerializeField] private TextMeshProUGUI _gameOverMessage;
 
 
     /// <summary>
@@ -26,6 +30,7 @@ public class UIController : MonoBehaviour {
     private void Start() {
         _gameController = FindObjectOfType<GameController>();
         _timeIsUpMessage.gameObject.SetActive(false); // Disable the time's up message
+        _gameOverMessage.gameObject.SetActive(false); // Disable the time's up message
     }
 
     // Update is called once per frame
@@ -47,11 +52,16 @@ public class UIController : MonoBehaviour {
     }
 
     /// <summary>
-    /// Notifies this controller that time is up, so the "Time's up!" message must be displayed.
+    /// Notifies this controller that time is up, so the "Time's up!" message is displayed.
     /// </summary>
     public void NotifyTimeUp() {
-        _timeIsUpMessage.SetText("Time's Up!");
         _timeIsUpMessage.gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// Notifies this controller that the game is over, so the "Game Over!" message is displayed.
+    /// </summary>
+    public void NotifyGameOver() {
+        _gameOverMessage.gameObject.SetActive(true);
+    }
 }

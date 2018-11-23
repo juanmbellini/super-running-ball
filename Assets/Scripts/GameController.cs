@@ -1,10 +1,21 @@
+using System.Collections;
 using Boo.Lang.Runtime;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Class containing the game's main logic.
 /// </summary>
 public class GameController : MonoBehaviour {
+    // ================================================================================================================
+    // Constants
+    // ================================================================================================================
+
+    /// <summary>
+    /// New gravity constant
+    /// </summary>
+    private const float Gravity = -60.0f;
+
     // ================================================================================================================
     // Prefabs
     // ================================================================================================================
@@ -33,13 +44,19 @@ public class GameController : MonoBehaviour {
     /// </summary>
     private PlayerCamera _playerCamera;
 
+    /// <summary>
+    /// The time manager.
+    /// </summary>
     private TimeManager _timeManager;
 
+    /// <summary>
+    /// The UI controller.
+    /// </summary>
     private UIController _uiController;
 
 
     // ================================================================================================================
-    // Objects
+    // Internal state
     // ================================================================================================================
 
     /// <summary>
@@ -48,9 +65,15 @@ public class GameController : MonoBehaviour {
     private Player _player;
 
     /// <summary>
-    /// New gravity constant
+    /// The 'y' at which the player loses.
     /// </summary>
-    private float gravity = -60.0f;
+    private float _losingHeight;
+
+    /// <summary>
+    /// Flag inidicating whether the player is alive.
+    /// </summary>
+    private bool _playerIsAlive;
+
 
     private void Awake() {
         _levelManager = FindObjectOfType<LevelManager>();
@@ -63,6 +86,12 @@ public class GameController : MonoBehaviour {
         SpawnPlayer();
         CreatePlayerCamera();
         _levelManager.Player = _player; // Sets the player in the level manager.
+        _losingHeight = _levelManager.LosingHeight;
+        _playerIsAlive = true;
+    }
+
+    private void Update() {
+        CheckPlayerLose();
     }
 
     /// <summary>
@@ -78,17 +107,23 @@ public class GameController : MonoBehaviour {
     /// Modifies global gravity
     /// </summary>
     private void ModifyGravity() {
-        Physics.gravity = new Vector3(0f, gravity, 0f);
+        Physics.gravity = new Vector3(0f, Gravity, 0f);
     }
-    
+
     /// <summary>
     /// Notifies this game controller that there is no more time.
     /// </summary>
     public void NotifyNoMoreTime() {
-        _timeManager.StopTimer();    
-        _uiController.NotifyTimeUp();
+        if (_playerIsAlive) {
+            _timeManager.StopTimer();
+            StartCoroutine(TimeUpCoroutine());
+        }
     }
-    
+
+    /// <summary>
+    /// Returns the time remaining.
+    /// </summary>
+    /// <returns></returns>
     public float GetTimeRemaining() {
         return _timeManager.TimeRemaining;
     }
@@ -104,5 +139,59 @@ public class GameController : MonoBehaviour {
         _playerCamera = Instantiate(_playerCameraPrefab);
         _playerCamera.name = "PlayerCamera";
         _playerCamera.Player = _player;
+    }
+
+
+    /// <summary>
+    /// Checks whether the player has lost.
+    /// </summary>
+    private void CheckPlayerLose() {
+        if (_player.transform.position.y < _losingHeight) {
+            Lose();
+        }
+    }
+
+    /// <summary>
+    /// The lose action.
+    /// </summary>
+    private void Lose() {
+        // Execute only if player is alive (might not be alive if already died and this is executed again).
+        if (_playerIsAlive) {
+            _playerIsAlive = false;
+            StartCoroutine(LoseCorutine());
+        }
+    }
+
+    /// <summary>
+    /// The time's up corutine.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator TimeUpCoroutine() {
+        _playerIsAlive = false; // Sanity check (re set this value just in case).
+        Debug.Log("Time is up!");
+        _playerCamera.StopFollowingPlayer();
+        _uiController.NotifyTimeUp();
+        yield return new WaitForSeconds(1.0f);
+        StartCoroutine(LoseCorutine());
+    }
+
+    /// <summary>
+    /// The Die corutine enumerator.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator LoseCorutine() {
+        _playerIsAlive = false; // Sanity check (re set this value just in case).
+        Debug.Log("The player has died. Game Over!");
+        _playerCamera.StopFollowingPlayer();
+        _uiController.NotifyGameOver();
+        yield return new WaitForSeconds(2.0f);
+        FinishGame();
+    }
+
+    /// <summary>
+    /// Finishes the game.
+    /// </summary>
+    private static void FinishGame() {
+        SceneManager.LoadScene("MainMenu");
     }
 }

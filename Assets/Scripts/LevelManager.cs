@@ -39,6 +39,11 @@ public class LevelManager : MonoBehaviour {
     [SerializeField] private Vector3 _levelStartingPosition;
 
     /// <summary>
+    /// The 'y' at which the player loses.
+    /// </summary>
+    [SerializeField] private float _losingHeight;
+
+    /// <summary>
     /// The amount of chunks added to the level at once.
     /// </summary>
     [SerializeField] private int _buildBatchSize;
@@ -134,6 +139,13 @@ public class LevelManager : MonoBehaviour {
     /// </summary>
     public Vector3 PlayerStartingPosition {
         get { return _playerStartingPosition; }
+    }
+
+    /// <summary>
+    /// Losing length's getter.
+    /// </summary>
+    public float LosingHeight {
+        get { return _losingHeight; }
     }
 
 
