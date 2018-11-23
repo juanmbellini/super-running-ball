@@ -58,6 +58,11 @@ public class LevelManager : MonoBehaviour {
     /// </summary>
     [SerializeField] private List<LevelComposition> _levelsCompositions;
 
+    /// <summary>
+    /// Amount of time to be added when a new level is created.
+    /// </summary>
+    [SerializeField] private float _timeToAdd = 20f;
+
 
     // ================================================================================================================
     // Internal state
@@ -118,11 +123,9 @@ public class LevelManager : MonoBehaviour {
     /// </summary>
     private Random.State _randomState;
 
-    
+
     private TimeManager _timeManager;
 
-    private float timeToAdd = 20f;
-    
 
     private bool _initialized = false;
 
@@ -190,7 +193,7 @@ public class LevelManager : MonoBehaviour {
         if (ShouldExpand()) {
             ExpandLevel();
             DestoyLevel();
-            _timeManager.addTime(timeToAdd);
+            AddTime();
         }
     }
 
@@ -327,6 +330,14 @@ public class LevelManager : MonoBehaviour {
         }
         Debug.Log("Destoying some level");
         DestroyTheFirstChunks(_buildBatchSize);
+    }
+
+    private void AddTime() {
+        if (_amountOfBatchesExecuted <= 2) {
+            return;
+        }
+        Debug.Log("Adding more time");
+        _timeManager.AddTime(_timeToAdd);
     }
 
 

@@ -123,9 +123,17 @@ public class GameController : MonoBehaviour {
     /// <summary>
     /// Returns the time remaining.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>The time remaining.</returns>
     public float GetTimeRemaining() {
         return _timeManager.TimeRemaining;
+    }
+
+    /// <summary>
+    /// The amount of distance that was "walked" by the player.
+    /// </summary>
+    /// <returns>The amount of distance that was "walked" by the player.</returns>
+    public float GetWalkedDistance() {
+        return _player.transform.position.x;
     }
 
     /// <summary>
@@ -158,6 +166,7 @@ public class GameController : MonoBehaviour {
         // Execute only if player is alive (might not be alive if already died and this is executed again).
         if (_playerIsAlive) {
             _playerIsAlive = false;
+            _timeManager.StopTimer();
             StartCoroutine(LoseCorutine());
         }
     }
