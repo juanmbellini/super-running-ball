@@ -12,7 +12,7 @@ public class TimeManager : MonoBehaviour {
     /// <summary>
     /// Initial time (in seconds).
     /// </summary>
-    [SerializeField] private float _startingTime = 5f;
+    [SerializeField] private float _startingTime = 15f;
 
     /// <summary>
     /// Time remaining.
