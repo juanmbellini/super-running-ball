@@ -79,7 +79,7 @@ MonoBehaviour:
   - {fileID: 114727802133473052, guid: 9bc340e1ac4f44f4fad4a4b7fe1ad054, type: 2}
   - {fileID: 114655126316073010, guid: a24ba0245256e88458e2cb90796aeb25, type: 2}
   - {fileID: 114043212913010152, guid: 034e178402489f749a5489390bbd5485, type: 2}
-  _randomSeed: 12345
+  _randomSeed: 0
   _playerStartingPosition: {x: 0, y: 3, z: 0}
   _levelStartingPosition: {x: 0, y: 0, z: 0}
   _losingHeight: -1
@@ -96,3 +96,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 14b16741cce974dee8ee301823c9f553, type: 2}
   - {fileID: 11400000, guid: b0d2fa21432f8447eb68882249457b72, type: 2}
   - {fileID: 11400000, guid: 8f90e09f0992e4ad5aaed69de0f08991, type: 2}
+  _timeToAdd: 20
