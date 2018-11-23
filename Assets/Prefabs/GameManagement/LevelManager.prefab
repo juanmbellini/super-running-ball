@@ -82,6 +82,7 @@ MonoBehaviour:
   _randomSeed: 12345
   _playerStartingPosition: {x: 0, y: 3, z: 0}
   _levelStartingPosition: {x: 0, y: 0, z: 0}
+  _losingHeight: -1
   _buildBatchSize: 10
   _creationMarginSize: 5
   _levelsCompositions:
