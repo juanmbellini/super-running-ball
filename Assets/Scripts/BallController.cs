@@ -10,6 +10,8 @@ public class BallController : MonoBehaviour {
     /// </summary>
     private const float Tolerance = 0.0001f;
 
+    private AudioSource _jumpSound;
+    
     /// <summary>
     /// The speed of the ball.
     /// </summary>
@@ -45,6 +47,7 @@ public class BallController : MonoBehaviour {
         distToGround = _collider.bounds.extents.y;
         _jumpingForce = new Vector3(0, _jumpingForceModule, 0);
         _isJumping = false;
+        _jumpSound = GetComponent<AudioSource>();
         _rigidBody.velocity = new Vector3(_horizontalSpeed, 0, 0);
     }
 
@@ -86,6 +89,7 @@ public class BallController : MonoBehaviour {
     /// Performs the jumping action.
     /// </summary>
     private void Jump() {
+        _jumpSound.Play();
         _rigidBody.AddForce(_jumpingForce, ForceMode.Impulse);
         _isJumping = true;
     }
