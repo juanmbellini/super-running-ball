@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b36d6d152701c4edaa296dc31c02a2ec
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_PersistentViewDataDictionary: {instanceID: 0}
+  - _levelManagerPrefab: {fileID: 114094000383749388, guid: 78ff2bc598cc54fb69de4dd6a0483616,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

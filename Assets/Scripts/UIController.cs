@@ -46,7 +46,7 @@ public class UIController : MonoBehaviour {
         //var actualScore = _gameController.GetScore();
         //var livesRemaining = _gameController.GetLives();
         // Values can go below zero in special cases
-        _timeText.SetText("Time\n" + (timeRemaining < 0 ? 0 : timeRemaining));
+        _timeText.SetText("Time Remaining\n" + (timeRemaining < 0 ? 0 : timeRemaining));
         //_scoreText.SetText("Score\n" + actualScore);
         //_livesText.SetText("Lives " + (livesRemaining < 0 ? 0 : livesRemaining));
     }
