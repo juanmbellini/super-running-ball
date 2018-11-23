@@ -99,6 +99,11 @@ public class LevelManager : MonoBehaviour {
     private int _actualLevelBatchsCount;
 
     /// <summary>
+    /// Indicates how many batches were executed so far.
+    /// </summary>
+    private int _amountOfBatchesExecuted;
+
+    /// <summary>
     /// A Dictionary containing the chunks according to the defficulty.
     /// </summary>
     private IDictionary<int, List<Chunk>> _chunksByDifficulty;
@@ -114,7 +119,20 @@ public class LevelManager : MonoBehaviour {
     private Random.State _randomState;
 
 
+    private bool _initialized = false;
+
+
     private void Start() {
+        InitializeLevelManager();
+    }
+
+    private void Update() {
+        CheckLevelExpansion();
+    }
+
+    private void InitializeLevelManager() {
+        Debug.Log("Initializing level manager");
+        RemoveChunksFromScene(); // First clear the level
         // If the seed is zero, then we use the "default" seed.
         if (_randomSeed != 0) {
             Random.InitState(_randomSeed); // Initialize random
@@ -123,14 +141,12 @@ public class LevelManager : MonoBehaviour {
         _amountOfCreatedChunks = 0;
         _nextStartingPosition = _levelStartingPosition.x;
         _chunksByDifficulty = SeparateByDifficulty();
-        // TODO: populate _levels Dict
         _levels = ToLevelDefinition(_levelsCompositions);
         _actualLevel = _levels.Keys.Min();
         _actualLevelBatchsCount = 0;
-    }
-
-    private void Update() {
-        CheckLevelExpansion();
+        _actualLevelBatchsCount = 0;
+        _initialized = true;
+        Debug.Log("Finished initializing level manager");
     }
 
 
@@ -165,6 +181,7 @@ public class LevelManager : MonoBehaviour {
     private void CheckLevelExpansion() {
         if (ShouldExpand()) {
             ExpandLevel();
+            DestoyLevel();
         }
     }
 
@@ -193,6 +210,7 @@ public class LevelManager : MonoBehaviour {
         // Up to here we know that a new level was recahed
         _actualLevel++; // Increase level
         _actualLevelBatchsCount = 0; // Reset the count
+        _amountOfBatchesExecuted++;
     }
 
 
@@ -292,6 +310,64 @@ public class LevelManager : MonoBehaviour {
         }
         Debug.LogError("Something wrong happend as no random was selected");
         throw new RuntimeException("This should not happen");
+    }
+
+    private void DestoyLevel() {
+        if (_amountOfBatchesExecuted <= 2) {
+            return;
+        }
+        Debug.Log("Destoying some level");
+        DestroyTheFirstChunks(_buildBatchSize);
+    }
+
+
+    /// <summary>
+    /// Destroys the first "chunkNumber" chunks in the list.
+    /// </summary>
+    /// <param name="amount">The amount of chunks to be destroyed.</param>
+    /// <exception cref="System.ArgumentException">If the chunk number is negative</exception>
+    private void DestroyTheFirstChunks(int amount) {
+        if (amount < 0) {
+            Debug.LogError("The amount must not be negative");
+            throw new ArgumentException("The amount must not be negative");
+        }
+        for (var i = 0; i < amount; i++) {
+            var chunk = _createdChunks[0];
+            _createdChunks.RemoveAt(0);
+            Destroy(chunk.gameObject);
+        }
+    }
+
+    /// <summary>
+    /// Clears the level.
+    /// </summary>
+    private void RemoveChunksFromScene() {
+        var chunks = FindObjectsOfType<Chunk>();
+        if (chunks == null) {
+            return;
+        }
+        foreach (var chunk in chunks) {
+            Destroy(chunk.gameObject);
+        }
+        _createdChunks.Clear();
+    }
+
+
+    // ================================================================================================================
+    // Editor stuff
+    // ================================================================================================================
+
+    /// <summary>
+    /// Creates a level with the given number.
+    /// </summary>
+    /// <param name="levelNumber"></param>
+    public void CreateLevel(int levelNumber) {
+        if (!_initialized) {
+            // First initialize the level manager
+            InitializeLevelManager();
+        }
+        _actualLevel = levelNumber;
+        ExpandLevel();
     }
 
 
