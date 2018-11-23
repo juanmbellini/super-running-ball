@@ -44,8 +44,14 @@ public class GameController : MonoBehaviour {
     /// </summary>
     private PlayerCamera _playerCamera;
 
+    /// <summary>
+    /// The time manager.
+    /// </summary>
     private TimeManager _timeManager;
 
+    /// <summary>
+    /// The UI controller.
+    /// </summary>
     private UIController _uiController;
 
 
@@ -103,15 +109,21 @@ public class GameController : MonoBehaviour {
     private void ModifyGravity() {
         Physics.gravity = new Vector3(0f, Gravity, 0f);
     }
-    
+
     /// <summary>
     /// Notifies this game controller that there is no more time.
     /// </summary>
     public void NotifyNoMoreTime() {
-        _timeManager.StopTimer();    
-        _uiController.NotifyTimeUp();
+        if (_playerIsAlive) {
+            _timeManager.StopTimer();
+            StartCoroutine(TimeUpCoroutine());
+        }
     }
-    
+
+    /// <summary>
+    /// Returns the time remaining.
+    /// </summary>
+    /// <returns></returns>
     public float GetTimeRemaining() {
         return _timeManager.TimeRemaining;
     }
@@ -146,20 +158,33 @@ public class GameController : MonoBehaviour {
         // Execute only if player is alive (might not be alive if already died and this is executed again).
         if (_playerIsAlive) {
             _playerIsAlive = false;
-            StartCoroutine(DieCorutine());
+            StartCoroutine(LoseCorutine());
         }
     }
 
     /// <summary>
-    /// The Die cortutine enumerator.
+    /// The time's up corutine.
     /// </summary>
     /// <returns></returns>
-    private IEnumerator DieCorutine() {
+    private IEnumerator TimeUpCoroutine() {
+        _playerIsAlive = false; // Sanity check (re set this value just in case).
+        Debug.Log("Time is up!");
+        _playerCamera.StopFollowingPlayer();
+        _uiController.NotifyTimeUp();
+        yield return new WaitForSeconds(1.0f);
+        StartCoroutine(LoseCorutine());
+    }
+
+    /// <summary>
+    /// The Die corutine enumerator.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator LoseCorutine() {
         _playerIsAlive = false; // Sanity check (re set this value just in case).
         Debug.Log("The player has died. Game Over!");
         _playerCamera.StopFollowingPlayer();
-        // TODO: notify UI
-        yield return new WaitForSeconds(1.0f);
+        _uiController.NotifyGameOver();
+        yield return new WaitForSeconds(2.0f);
         FinishGame();
     }
 
